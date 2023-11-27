@@ -42,9 +42,6 @@ const config: HardhatUserConfig = {
   },
   networks: {
     goerli: getNetwork('goerli'),
-    sepolia: {
-      url: 'https://eth-sepolia.g.alchemy.com/v2/mN6co7qEg4SbbstEVxuN8pFQNvD1FYh6'
-    },
     mumbai: getNetwork('polygon-mumbai'),
   },
   etherscan: {
