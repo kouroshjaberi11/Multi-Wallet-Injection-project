@@ -1,4 +1,5 @@
 import { EIP1193_ERROR_CODES } from './window-provider/eip-1193';
+import { Eip1193Provider } from "ethers";
 
 export type WalletProvider = {
   providerInfo?: {
@@ -69,8 +70,8 @@ export type PortResponseEvent = {
 
 export type EIP1193ErrorPayload =
   | (typeof EIP1193_ERROR_CODES)[keyof typeof EIP1193_ERROR_CODES] & {
-      data?: unknown;
-    };
+    data?: unknown;
+  };
 
 export type WindowTransport = {
   postMessage: (data: WindowRequestEvent) => void;
@@ -99,3 +100,26 @@ export type AAExtensionConfigPayload = {
   shouldReload?: boolean;
   [prop: string]: unknown;
 };
+
+
+interface EIP6963ProviderInfo {
+  uuid: string;
+  name: string;
+  icon: string;
+  rdns: string;
+}
+
+interface EIP6963ProviderDetail {
+  info: EIP6963ProviderInfo;
+  provider: Eip1193Provider;
+}
+
+interface EIP6963AnnounceProviderEvent extends CustomEvent {
+  type: "eip6963:announceProvider";
+  detail: EIP6963ProviderDetail;
+}
+
+interface EIP6963RequestProviderEvent extends Event {
+  type: "eip6963:requestProvider";
+}
+
