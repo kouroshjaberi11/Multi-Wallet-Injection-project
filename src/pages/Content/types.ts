@@ -69,8 +69,8 @@ export type PortResponseEvent = {
 
 export type EIP1193ErrorPayload =
   | (typeof EIP1193_ERROR_CODES)[keyof typeof EIP1193_ERROR_CODES] & {
-      data?: unknown;
-    };
+    data?: unknown;
+  };
 
 export type WindowTransport = {
   postMessage: (data: WindowRequestEvent) => void;
@@ -99,3 +99,4 @@ export type AAExtensionConfigPayload = {
   shouldReload?: boolean;
   [prop: string]: unknown;
 };
+
