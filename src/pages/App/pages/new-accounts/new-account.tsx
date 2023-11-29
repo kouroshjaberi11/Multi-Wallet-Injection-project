@@ -124,6 +124,7 @@ const NewAccount = () => {
           context,
         })
       );
+
       setShowLoader(false);
     },
     [backgroundDispatch, supportedNetworks, name]
@@ -141,7 +142,7 @@ const NewAccount = () => {
   }, [stage, setStage, onOnboardingComplete]);
 
   return (
-    <Container sx={{ height: '100vh' }}>
+    <Container sx={{ width: 'fit-content', height: '100vh' }}>
       <Stack
         spacing={2}
         sx={{ height: '100%' }}

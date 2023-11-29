@@ -14,6 +14,7 @@ html,
 body {
   height: 100%;
   background: #f2f4f6;
+  width: fit-content;
 }
 body {
   line-height: 1.5;

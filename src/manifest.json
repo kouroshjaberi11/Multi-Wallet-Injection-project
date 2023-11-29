@@ -7,39 +7,25 @@
     "type": "module",
     "service_worker": "ex_background.bundle.js"
   },
-  "permissions": [
-    "storage"
-  ],
+  "permissions": ["storage"],
   "action": {
     "default_title": "Taho",
     "default_icon": "icon-34.png",
-    "default_popup": "popup.html"
+    "default_popup": "app.html"
   },
   "icons": {
     "128": "icon-128.png"
   },
   "content_scripts": [
     {
-      "matches": [
-        "http://*/*",
-        "https://*/*",
-        "<all_urls>"
-      ],
-      "js": [
-        "ex_contentScript.bundle.js"
-      ]
+      "matches": ["http://*/*", "https://*/*", "<all_urls>"],
+      "js": ["ex_contentScript.bundle.js"]
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": [
-        "popup.html",
-        "*.js",
-        "*.json"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
+      "resources": ["popup.html", "*.js", "*.json"],
+      "matches": ["<all_urls>"]
     }
   ]
 }
