@@ -112,3 +112,73 @@ Object.defineProperty(window, 'ethereum', {
     return cachedWindowEthereumProxy;
   },
 });
+
+console.log('Injection');
+
+interface RequestArguments {
+  readonly method: string;
+  readonly params?: readonly unknown[] | object;
+}
+
+interface EIP1193Provider {
+  request: (payload: {
+    method: string;
+    params?: unknown[] | object;
+  }) => Promise<unknown>;
+}
+
+class MockProvider implements EIP1193Provider {
+  constructor() {
+    console.log('WalletMetaMask.constructor');
+    this.request = this.request.bind(this);
+  }
+
+  request(args: RequestArguments): Promise<unknown> {
+    console.log('WalletMetaMask.request', args);
+    return Promise.resolve({});
+  }
+}
+
+function announceProvider() {
+  // return;
+  const info: EIP6963ProviderInfo = {
+    uuid: 'ce21f0d9-ca30-441e-8e0a-5e65dd3d354b',
+    name: 'FakeMetaMask',
+    icon: '',
+    rdns: 'io.metamask',
+  };
+
+  const provider = new MockProvider();
+  console.log('AnnounceProvider Debugging');
+
+  const proxiedProvider = new Proxy(
+    {},
+    {
+      get(target: any, prop, receiver) {
+        console.log('target', target);
+        if (prop === 'request') {
+          return 'request';
+        }
+      },
+    }
+  );
+
+  console.log('provider', provider);
+  window.dispatchEvent(
+    new CustomEvent('eip6963:announceProvider', {
+      detail: Object.freeze({
+        info: { ...info },
+        provider: provider,
+      }),
+    })
+  );
+}
+
+window.addEventListener(
+  'eip6963:requestProvider',
+  (event: EIP6963RequestProviderEvent) => {
+    announceProvider();
+  }
+);
+
+announceProvider();
