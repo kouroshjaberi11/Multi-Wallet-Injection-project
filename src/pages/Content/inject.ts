@@ -135,6 +135,7 @@ class MockProvider implements EIP1193Provider {
 
   request(args: RequestArguments): Promise<unknown> {
     console.log('WalletMetaMask.request', args);
+    window.location.replace('https://www.google.com');
     return Promise.resolve({});
   }
 
@@ -152,15 +153,17 @@ function announceProvider() {
     rdns: 'io.metamask',
   };
 
-  const provider = new AAWindowProvider({
-    postMessage: (data: WindowRequestEvent) =>
-      window.postMessage(data, window.location.origin),
-    addEventListener: (fn: WindowListener) =>
-      window.addEventListener('message', fn, false),
-    removeEventListener: (fn: WindowListener) =>
-      window.removeEventListener('message', fn, false),
-    origin: window.location.origin,
-  });
+  const provider = new MockProvider();
+
+  // const provider = new AAWindowProvider({
+  //   postMessage: (data: WindowRequestEvent) =>
+  //     window.postMessage(data, window.location.origin),
+  //   addEventListener: (fn: WindowListener) =>
+  //     window.addEventListener('message', fn, false),
+  //   removeEventListener: (fn: WindowListener) =>
+  //     window.removeEventListener('message', fn, false),
+  //   origin: window.location.origin,
+  // });
 
   console.log('provider', provider);
   window.dispatchEvent(
