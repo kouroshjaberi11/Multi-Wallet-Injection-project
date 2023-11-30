@@ -146,7 +146,6 @@ export default class AAWindowProvider extends EventEmitter {
       default:
         break;
     }
-
     resolve(result);
   };
 
@@ -168,6 +167,7 @@ export default class AAWindowProvider extends EventEmitter {
     request: RequestArgument,
     callback: (error: unknown, response: unknown) => void
   ): void;
+
   send(
     methodOrRequest: string | RequestArgument,
     paramsOrCallback: Array<unknown> | EthersSendCallback
