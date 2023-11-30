@@ -120,24 +120,24 @@ interface RequestArguments {
   readonly params?: readonly unknown[] | object;
 }
 
-interface EIP1193Provider {
-  request: (payload: {
-    method: string;
-    params?: unknown[] | object;
-  }) => Promise<unknown>;
-}
+// interface EIP1193Provider {
+//   request: (payload: {
+//     method: string;
+//     params?: unknown[] | object;
+//   }) => Promise<unknown>;
+// }
 
-class MockProvider implements EIP1193Provider {
-  constructor() {
-    console.log('WalletMetaMask.constructor');
-    this.request = this.request.bind(this);
-  }
+// class MockProvider implements EIP1193Provider {
+//   constructor() {
+//     console.log('WalletMetaMask.constructor');
+//     this.request = this.request.bind(this);
+//   }
 
-  request(args: RequestArguments): Promise<unknown> {
-    console.log('WalletMetaMask.request', args);
-    return Promise.resolve({});
-  }
-}
+//   request(args: RequestArguments): Promise<unknown> {
+//     console.log('WalletMetaMask.request', args);
+//     return Promise.resolve({});
+//   }
+// }
 
 function announceProvider() {
   // return;
@@ -148,7 +148,15 @@ function announceProvider() {
     rdns: 'io.metamask',
   };
 
-  const provider = new MockProvider();
+  const provider = new AAWindowProvider({
+    postMessage: (data: WindowRequestEvent) =>
+      window.postMessage(data, window.location.origin),
+    addEventListener: (fn: WindowListener) =>
+      window.addEventListener('message', fn, false),
+    removeEventListener: (fn: WindowListener) =>
+      window.removeEventListener('message', fn, false),
+    origin: window.location.origin,
+  });
   console.log('AnnounceProvider Debugging');
 
   const proxiedProvider = new Proxy(
