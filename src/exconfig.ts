@@ -12,7 +12,8 @@ export default {
     name: 'Sepolia',
     provider: 'https://sepolia.infura.io/v3/bdabe9d2f9244005af0f566398e648da',
     entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-    bundler: 'https://sepolia.voltaire.candidewallet.com/rpc',
+    bundler:
+      'https://api.stackup.sh/v1/node/d09d274cd223b77ddced76fd8b650eeb0096d8392cf0b3f49f62c2e6dd6f61bb',
     baseAsset: {
       symbol: 'ETH',
       name: 'ETH',
