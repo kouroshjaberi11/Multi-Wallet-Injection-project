@@ -177,7 +177,7 @@ export const sendTransaction = createBackgroundAsyncThunk(
         unsignedUserOp,
         context
       );
-      const txnHash = keyringService.sendUserOp(address, signedUserOp);
+      const txnHash = await keyringService.sendUserOp(address, signedUserOp);
 
       dispatch(clearTransactionState());
 
