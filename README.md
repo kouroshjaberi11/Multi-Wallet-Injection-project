@@ -19,6 +19,9 @@ Trampoline is a chrome extension boilerplate code to showcase your own Smart Con
    4. Select the `build` folder.
 8. Happy hacking.
 
+## Viewing different attacks
+There are different git branches in this repository showing some potential vulnerabilities that can be exploited by a rogue wallet.
+
 > **Warning**
 > Auto refresh is disabled by default, so you will have to manually refresh the page.
 > If you make changes in background script or account-api, you will also have to refresh the background page. Check instructions on how to do that below.
